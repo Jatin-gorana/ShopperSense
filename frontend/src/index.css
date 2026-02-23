@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-border: var(--card-border);
+    --color-primary: var(--primary);
+    --color-secondary: var(--secondary);
+    --color-text-primary: var(--text-primary);
+    --color-text-secondary: var(--text-secondary);
+    --color-border: var(--border);
+    --color-accent-aqua: #00F5D4;
+    --color-accent-purple: #7B61FF;
+}
+
+:root {
+    font-family: 'Poppins', system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    color-scheme: light dark;
+    
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    --radius: 1rem;
+    
+    /* Light Theme */
+    --background: #F7F9FC;
+    --card: #FFFFFF;
+    --card-border: rgba(0, 0, 0, 0.05);
+    --primary: #00AEEF;
+    --secondary: #6C63FF;
+    --text-primary: #1F2937;
+    --text-secondary: #6B7280;
+    --border: rgba(0, 0, 0, 0.1);
+    --foreground: #1F2937;
+    
+    transition: background-color 250ms ease-in-out, color 250ms ease-in-out;
+}
+
+.dark {
+    /* Dark Theme */
+    --background: #0B0F1A;
+    --card: rgba(255, 255, 255, 0.03);
+    --card-border: rgba(255, 255, 255, 0.05);
+    --primary: #00F5D4;
+    --secondary: #7B61FF;
+    --text-primary: #FFFFFF;
+    --text-secondary: #9CA3AF;
+    --border: rgba(255, 255, 255, 0.1);
+    --foreground: #FFFFFF;
+}
+
+* {
+    font-optical-sizing: auto;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-decoration-skip: objects;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 250ms ease-in-out, border-color 250ms ease-in-out, box-shadow 250ms ease-in-out, color 250ms ease-in-out;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    height: 100dvh;
+    width: 100%;
+    background-color: var(--background);
+    color: var(--text-primary);
+}
+
+#root {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+}
+
+/* Glassmorphism specifically for dark mode */
+.dark .glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.light .glass-card, :root:not(.dark) .glass-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-in-from-bottom {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes zoom-in {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.animate-in {
+  animation-duration: 500ms;
+  animation-fill-mode: both;
+}
+
+.fade-in {
+  animation-name: fade-in;
+}
+
+.slide-in-from-bottom {
+  animation-name: slide-in-from-bottom;
+}
+
+.zoom-in {
+  animation-name: zoom-in;
+}
+
+::selection {
+  background-color: rgba(0, 245, 212, 0.3);
+  color: white;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.2);
+  border-radius: 10px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+  opacity: 0.5;
+}
+
+/* Chart Tooltip visibility fix */
+.recharts-tooltip-wrapper {
+    z-index: 1000;
+}
+
+.recharts-default-tooltip {
+    background-color: #FFFFFF !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+    color: #1F2937 !important;
+    padding: 10px !important;
+}
+
+.dark .recharts-default-tooltip {
+    background-color: #1A1F2E !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5) !important;
+}
+
+.recharts-tooltip-label {
+    color: #1F2937 !important;
+    font-weight: 600 !important;
+    margin-bottom: 4px !important;
+    display: block !important;
+}
+
+.dark .recharts-tooltip-label {
+    color: #FFFFFF !important;
+}
+
+.recharts-tooltip-item {
+    color: #4B5563 !important;
+    font-size: 12px !important;
+    padding: 2px 0 !important;
+}
+
+.dark .recharts-tooltip-item {
+    color: #D1D5DB !important;
+}
+
+.recharts-tooltip-item-list {
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+}
+
+.recharts-tooltip-item-name, 
+.recharts-tooltip-item-value {
+    color: inherit !important;
+}
